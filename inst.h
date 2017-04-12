@@ -1,8 +1,8 @@
 /**********************************************************************
-* Author: Cole McKnight
+* Author: Cole McKnight, Luke Morrow
 * File: inst.h
 * Modified On: 4/10/17
-* Description: header for Inst, which represents a single MIPS instruction.
+* Description: Header for Inst, which represents a single MIPS instruction.
 ***********************************************************************/
 #ifndef INST_H
 #define INST_H

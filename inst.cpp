@@ -1,8 +1,8 @@
 /**********************************************************************
-* Author: Cole McKnight
+* Author: Cole McKnight, Luke Morrow
 * File: inst.cpp
 * Modified On: 4/10/17
-* Description: contains Inst methods
+* Description: Contains Inst methods
 ***********************************************************************/
 
 #include <math.h>

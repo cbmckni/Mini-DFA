@@ -1,5 +1,5 @@
 /***********************************************
-Name: Cole McKnight
+Name: Cole McKnight, Luke Morrow
 File: dfa.cpp
 Description: Mini-DFA that produces data flow analysis for MIPS instructions.
 Date: 4/10/17
@@ -82,13 +82,6 @@ FILE ANALYSIS
             index++;
         }
 
-        //register array population
-        for(int i = 0;i < instr.size();i++)
-        {
-            cout << endl << instr[i].fullI;
-            int rIndex = 0;
-        }
-
 /***********************************************
 REGISTER RENAMING
 ***********************************************/
@@ -116,11 +109,6 @@ REGISTER RENAMING
 /***********************************************
 DATA FLOW ANALYSIS 
 ***********************************************/
-        for(int i = 0;i < instr.size();i++) // prints initial instructions
-        {
-            cout << endl << instr[i].fullI;
-        }
-        cout << endl;
 
         //populate levels
         vector< vector<Inst> > levels; //holds instructions for each level
@@ -128,7 +116,6 @@ DATA FLOW ANALYSIS
         {
             vector<Inst> temp;
             levels.push_back(temp);
-            cout << endl << "-------------------" << endl;
             for(int i = instr.size()-1;i > -1;i--) //instructions
             {
                 bool isDep = false;
@@ -136,22 +123,17 @@ DATA FLOW ANALYSIS
                 {
                     Inst a = instr[i];
                     Inst b = instr[j];
-                    if(a.index == b.index)
-                        isDep = true;
                     if(a.regs[0] == b.regs[0]) //checks for WAW 
                     {
                         isDep = true;
-                        cout << "inst " << a.index << " WAW dependent on inst " << b.index << " through reg " << a.regs[0] << endl;
                     }
                     if(a.regs[0] == b.regs[1] || a.regs[0] == b.regs[2]) //checks for WAR
                     {
                         isDep = true;
-                        cout << "inst " << a.index << " WAR dependent on inst " << b.index << " through reg " << a.regs[0] << endl;
                     }
                     if(a.regs[1] == b.regs[0] || a.regs[2] == b.regs[0]) //checks for RAW 
                     {
                         isDep = true;
-                        cout << "inst " << a.index << " RAW dependent on inst " << b.index << " through reg " << b.regs[0] << endl;
                     }
                 }
                 if(!isDep) //adds instruction to level and removes from instr vector

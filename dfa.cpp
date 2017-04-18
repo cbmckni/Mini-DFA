@@ -2,7 +2,8 @@
 Name: Cole McKnight, Luke Morrow
 File: dfa.cpp
 Description: Mini-DFA that produces data flow analysis for MIPS instructions.
-Date: 4/10/17
+Date: 4/17/17
+Compile: g++ inst.cpp dfa.cpp -o dfa
 ***********************************************/
 #include <iostream> 
 #include <stdio.h>
@@ -84,7 +85,7 @@ FILE ANALYSIS
 
 /***********************************************
 REGISTER RENAMING
-***********************************************/
+***********************************************/  
 
         if(rr)
         {
@@ -92,13 +93,16 @@ REGISTER RENAMING
             for(int i = 0;i < instr.size();i++) 
             {
                 int reg = instr[i].regs[0];
-                for(int j = i;j < instr.size();j++) 
+                if(reg != 0)
                 {
-                    for(int k = 0;k < 3;k++)
+                    for(int j = i;j < instr.size();j++) 
                     {
-                        if(instr[j].regs[k] == reg)
+                        for(int k = 0;k < 3;k++)
                         {
-                            instr[j].regs[k] = renameIndex;
+                            if(instr[j].regs[k] == reg)
+                            {
+                                instr[j].regs[k] = renameIndex;
+                            }
                         }
                     }
                 }
@@ -149,12 +153,12 @@ OUTPUT
 ***********************************************/
 
         printf("Load delay set to %x.\n",ld);
-        int delay = 0;
+        int delay = 1;
         int i;
         for(i = 0;i < levels.size();i++) //goes through each level
         {
             bool delayBool = false;
-            if(i == 0)
+            if(i == 0) 
             {
                 cout << "level 0 instructions: " << endl;
             }else{cout << "level " << ((i-1)+delay) << " instructions: " << endl;}
